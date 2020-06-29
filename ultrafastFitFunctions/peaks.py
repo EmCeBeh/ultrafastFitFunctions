@@ -63,9 +63,9 @@ class Combinations():
         pass
     
     def pseudoVoigt(x, mu, sig, A, alpha):
-        model1 = A*(alpha * 1/(1 + ((x-mu)/sig)**2) 
-        model2 = (1-alpha)*exp(-log(2)*((x-mu)/sig)**2))
-        return model
+        model1 = alpha * 1/(1 + ((x-mu)/sig)**2) 
+        model2 = (1-alpha)*exp(-log(2)*((x-mu)/sig)**2)
+        return A* (model1 + model2)
 
     def asymGauss(x, ampl, center, sigma, alpha):
         model1 = exp(-((x-center)**2)/(2*sigma**2))

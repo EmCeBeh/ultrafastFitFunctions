@@ -182,5 +182,5 @@ class ConvolvedDecays():
         
         model6 = ABHConvGauss(x-mu,A,B,sigH)
 
-    return (alpha*(model1 + model2 + model3)+(1-alpha)*(model4 + model5 + model6))**2
+        return (alpha*(model1 + model2 + model3)+(1-alpha)*(model4 + model5 + model6))**2
     
