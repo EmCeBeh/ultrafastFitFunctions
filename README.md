@@ -8,7 +8,7 @@ If it is not called 'x', when calling lmfit's fit, the new name needs to be spec
 ========================================================
 Valid parameters in order of appearance in the functions:
 
-    mu             :   shift of x =>  x0 = x' = x-mu
+    mu             :   shift of x by x0 / mu
     sigT           :   T = '', S, H, ... ; width / scaling in x-directions. Similar / related to a FWHM.
     taun           :   n = 1,2,... ; similar to sig; used as taun**1 in denominator of exp
     A,B,C,D,...    :   multiplier / normalisation    
