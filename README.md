@@ -5,6 +5,16 @@ To be compatible with the great fitting package lmfit, all functions need to hav
 If it is not called 'x', when calling lmfit's fit, the new name needs to be specified, which is prone to errors.
 
 
+=========Usage Example ===============
+
+    from ultrafastFitFunctions import *
+    Decays.expDecay(1,1,1)
+
+======================================
+
+
+
+
 ========================================================
 Valid parameters in order of appearance in the functions:
 
