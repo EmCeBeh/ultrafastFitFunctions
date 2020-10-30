@@ -2,30 +2,30 @@ from numpy import *  #pi, exp, sqrt, etc.
 from scipy.special import erf, erfc
 
 
-def heaviside(x):
+def step(x):
 
     #nice name, but renaming to step would make many things shorter
-    output = np.ones_like(x)
+    output = ones_like(x)
     output[x < 0] = 0
     #output[x >= 0] = 1
     return output
 
 def expDecay(x, tau, A):
-    return A*heaviside(x)*(exp(-x/tau)-1) + 1
+    return A*step(x)*(exp(-x/tau)-1) + 1
     
 def sglExpDecay(x, mu, tau, A, B):
-    return A-(1-B*exp(-(x-mu)/tau))*heaviside(mu-x)
+    return A-(1-B*exp(-(x-mu)/tau))*step(mu-x)
     
 def expDecayOffs(x, tau, A, c):
-    return A*heaviside(x)*(exp(-x/tau)-1) + 1 + c
+    return A*step(x)*(exp(-x/tau)-1) + 1 + c
     
 def doubleExpDecay(x, tau1, tau2, A, B):
-    model1 = A*heaviside(x)*(exp(-x/tau1)-1)
-    model2 = B*heaviside(x)*(exp(-x/tau2)-1)
+    model1 = A*step(x)*(exp(-x/tau1)-1)
+    model2 = B*step(x)*(exp(-x/tau2)-1)
     return model1 + model2 + 1
 
 def doubleExpDecay_II(x, tau1, tau2, A, B, mu, c):
-    return A*heaviside(x-mu)*(exp(-(x-mu)/tau1)-1)+B*heaviside(x-mu)*(exp(-(x-mu)/tau2)-1) + c
+    return A*step(x-mu)*(exp(-(x-mu)/tau1)-1)+B*step(x-mu)*(exp(-(x-mu)/tau2)-1) + c
 
 def doubleDecay(x, mu, tau1, tau2, A, q):
     B = (1-q)*A    
@@ -35,11 +35,7 @@ def doubleDecay(x, mu, tau1, tau2, A, q):
 def doubleDecay2(x, mu, tau1, tau2, A, B):
     return doubleExpDecay(x-mu,tau1,tau2,A,B)
 
-class ConvolvedDecays():
 
-def __init__():
-    pass
-    
 def expConvGauss(x, tau, A, sig):
     model1 = exp(-x/tau)*exp(sig**2/(2*tau**2))*(erf((sig**2-x*tau)/(sqrt(2)*sig*tau))-1)
     return -A/2*(model1)
@@ -72,12 +68,12 @@ def expConvGaussApprox(x, tau, A, sig):
     k = C/r - x*C/(sig*r**2) + C*(sig**2-x**2)/(sig**2*r**3)#+C*x*(3*sig**2-x**2)/(sig**3*r**4)-C*(3*sig**4-6*sig**2*x**2+x**4)/(sig**4*r**5)
     return -A/2*k
     
-def doubleDecaySingleConv(x, mu, tau1, tau2, A, B, sig):
+def doubleDecaySingleConv(x, t0, tau1, tau2, A, B, sig, c):
     C = -(A+B)
-    model1 = -A*expConvGaussNormalised(x-mu, tau1, sig)
-    model2 = -B*expConvGaussNormalised(x-mu, tau2, sig)
-    model3 = +1/2*C*erfc(-(x-mu)/(sqrt(2*sig**2))) +1
-    return  model1 + model2 + model3
+    model1 = -A*expConvGaussNormalised(x-t0, tau1, sig)
+    model2 = -B*expConvGaussNormalised(x-t0, tau2, sig)
+    model3 = +1/2*C*erfc(-(x-t0)/(sqrt(2*sig**2))) +1
+    return  model1 + model2 + model3 + c
 
 def doubleDecayDoubleConv(x, mu, tau1, tau2, A, q, alpha, sigS, sigH):
 
