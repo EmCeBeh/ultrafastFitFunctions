@@ -52,3 +52,5 @@ def asymSincSqrd(x, ampl, center, sigmaL, sigmaR):
 def sincSqrd(x, ampl, center, sigma):
     
     return ampl * sinc((x-center)/sigma)**2
+
+    
