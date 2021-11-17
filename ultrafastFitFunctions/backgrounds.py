@@ -29,3 +29,13 @@ def benOcko(x, qc,a ,c, f_A, f_f, sig):
 #        model2 = B*(alpha2 * 1/(1 + ((x-mu2)/sig2)**2) + (1-alpha2)*exp(-log(2)*((x-mu2)/sig2)**2))
 #        return model1 + model2
 # Same as adding the two above...
+
+
+def oscillation(x, mu, A, p):
+    term1 = -A*np.cos(1/p*2*np.pi*(x-mu)) + A
+    return term1*step(x, mu)
+
+def oscillationStep(x, mu, phase, A, p, Aexp, tau, offset):
+    term1 = -A*np.cos(1/p*2*np.pi*(x-mu)) + A
+    term2 = Aexp*np.exp(-(x-mu)/tau) - Aexp
+    return (term1+term2)*step(x, mu)
