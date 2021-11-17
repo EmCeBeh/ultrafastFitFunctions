@@ -42,5 +42,13 @@ def DyRefAsymGaussLog(x, thickness, roughness, roughnessSub, I0, bgd, resol, ene
     model2 = asymGauss(x, ampl, center, sigmaL, sigmaR)
     return log10(model1 + model2)
     
+def asymSincSqrd(x, ampl, center, sigmaL, sigmaR):
+        
+    sincL = np.sinc((x[x < center]-center)/sigmaL)**2
+    sincR = np.sinc((x[x >= center]-center)/sigmaR)**2
+    return ampl * np.r_[sincL,sincR]
+
+
+def sincSqrd(x, ampl, center, sigma):
     
-    
+    return ampl * np.sinc((x-center)/sigma)**2

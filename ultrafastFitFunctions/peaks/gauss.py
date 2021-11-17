@@ -31,5 +31,8 @@ def normGauss(x, mu, sig, A, c):
     return model
 
 def gaussAssymetry(x, mu, sig, alpha):
+    '''
+    To be multiplied by gaussian above to provide assymetry
+    '''
     model = 1+erf((alpha*(x-mu))/(sig*sqrt(2)))
     return model

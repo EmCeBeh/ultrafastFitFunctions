@@ -13,14 +13,14 @@ def cBg(x, mu, A, c):
     model = A*(x-mu)**(-4) + c
     return model
 
-def benOcko(x, qc,a ,b, c, d, sig):
+def benOcko(x, qc,a ,c, f_A, f_f, sig):
 
     qPrime = sqrt(x**2 - qc**2)
     
     Rf = abs((x-qPrime)/(x+qPrime))**2
     
 #     R = Rf*(a**2 + b**2 + 2*a*b*cos(x*d))*exp(-x**2*sigma**2)
-    R = Rf*a*(1+b*cos(x*d))*exp(-(x*sig**2)) + c
+    R = Rf*a*(1+f_A*cos(x*f_f))*exp(-(x*sig**2)) + c
 
     return R
 
