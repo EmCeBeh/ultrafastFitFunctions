@@ -1,6 +1,8 @@
 from numpy import *  #pi, exp, sqrt, etc.
 from scipy.special import erf, erfc
 
+from ..backgrounds import benOcko1,benOcko2
+
 def lorentz(x, mu, sig, A, c):
     model = A/(1 + ((x-mu)/sig)**2)
     return model
@@ -24,16 +26,26 @@ def asymGauss(x, ampl, center, sigma, alpha):
     model2 = (1+erf((alpha*(x-center))/(sigma*sqrt(2))))
     return ampl * model1 * model2
 
-def benOckoAsymGaussLog(x, qc,a ,b, c, d, sig, ampl, center, sigmaL, sigmaR, scale, offset):
-    x = scale*x+offset
+def benOckoAsymGaussLog(x, qc,a ,b, c, d, sig, ampl, center, sigmaL, sigmaR):
     model1 = benOcko(x, qc,a ,b, c, d, sig)
     model2 = asymGauss(x, ampl, center, sigmaL, sigmaR)
     return log10(model1 + model2)
 
-def benOckoAsymSincLog(x, qc,a ,b, c, d, sig, ampl, center, sigmaL, sigmaR, scale, offset):
-    x = scale*x+offset
-    model1 = benOcko(x, qc,a ,b, c, d, sig)
-    model2 = asymSincSqd(x, ampl, center, sigmaL, sigmaR)
+def benOckoAsymSincLog1(x, qc,a ,b, c, d, sig, ampl, center, sigmaL, sigmaR):
+'''
+qc is where the background starts
+'''
+
+    model1 = benOcko1(x, qc,a ,b, c, d, sig)
+    model2 = asymSincSqrd(x, ampl, center, sigmaL, sigmaR)
+    return log10(model1 + model2)
+
+def benOckoAsymSincLog2(x, qc,a ,b, c, d, sig, ampl, center, sigmaL, sigmaR):
+'''
+qc is where the background starts
+'''
+    model1 = benOcko2(x, qc,a ,b, c, d, sig)
+    model2 = asymSincSqrd(x, ampl, center, sigmaL, sigmaR)
     return log10(model1 + model2)
 
 def DyRefAsymGaussLog(x, thickness, roughness, roughnessSub, I0, bgd, resol, energy, relaxation, ampl, center, sigma, alpha, scale, offset):
@@ -53,4 +65,3 @@ def sincSqrd(x, ampl, center, sigma):
     
     return ampl * sinc((x-center)/sigma)**2
 
-    
