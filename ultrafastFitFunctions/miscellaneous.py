@@ -1,4 +1,4 @@
-from numpy import *
+from numpy import exp
 
 def sigmoid(x, mu, A, k, c):
     model = A/(1+exp(-k*(x-mu)))+c

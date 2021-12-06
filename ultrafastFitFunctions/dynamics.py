@@ -1,9 +1,8 @@
-from numpy import *  #pi, exp, sqrt, etc.
+from numpy import exp, sqrt, ones_like, pi
 from scipy.special import erf, erfc
 
 
 def step(x):
-
     #nice name, but renaming to step would make many things shorter
     output = ones_like(x)
     output[x < 0] = 0
