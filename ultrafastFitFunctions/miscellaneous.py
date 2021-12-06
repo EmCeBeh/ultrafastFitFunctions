@@ -33,9 +33,6 @@ def saturation2(x, mu, A=1, k=1):
     
     c = 1/2-mu*slope
     s = s-c
-    
-    
-    
     s[x<0] = 0
     s = A*s
     
