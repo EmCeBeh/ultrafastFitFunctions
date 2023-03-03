@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ultrafastFitFunctions
-Version: 1.0
+Version: 0.5.0
 Summary: Collection of common fit functions for discribing ultrafast and static physics phenomena
 Home-page: https://github.com/EmCeBeh/ultrafastFitFunctions
 Author: Martin Borchert
