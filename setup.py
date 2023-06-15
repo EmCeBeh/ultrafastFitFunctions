@@ -19,7 +19,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='ultrafastFitFunctions',
     version='0.5.0',
-    packages=['ultrafastFitFunctions'],
+    packages=find_packages(),
     url='https://github.com/EmCeBeh/ultrafastFitFunctions',  # Optional
     install_requires=['numpy', 'scipy', 'uncertainties'],  # Optional
     license='',
